@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FORM CHẤM PHÒNG</title>
+    <style>
+        /* CSS như bạn đã thiết lập trước đó */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            margin-bottom: 20px;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        label {
+            font-size: 16px;
+            display: block;
+            margin-bottom: 10px;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            background-color: #4285f4;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s, transform 0.1s ease;
+        }
+        button:hover {
+            background-color: #357ae8;
+        }
+        #result {
+            font-size: 16px;
+            color: #333;
+        }
+        #formContainer {
+            display: none; /* Ẩn iframe ban đầu */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            z-index: 2;
+        }
+        .hide-container {
+            opacity: 0;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-header">
+            <h1>FORM CHẤM PHÒNG</h1>
+        </div>
+        <form id="roomForm">
+            <div class="form-group">
+                <label for="roomNumber">Nhập số phòng</label>
+                <input type="text" id="roomNumber" name="roomNumber" placeholder="Nhập số phòng" required>
+            </div>
+            <button type="submit" id="getFormBtn">Get Form</button>
+            <button type="button" id="getFilledFormBtn">Get Fill Form</button> <!-- Nút mới -->
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <script>
+      document.getElementById("roomForm").addEventListener("submit", function(event) {
+      event.preventDefault();  // Ngăn form gửi đi
+
+        // Lấy giá trị từ input
+        let roomNumber = document.getElementById("roomNumber").value.trim();
+        let status = "notfilled" // Lấy giá trị trạng thái đã chọn
+
+        // Tạo URL dựa trên phòng và trạng thái
+        const baseUrl = "https://script.google.com/macros/s/AKfycbyh60RP9G05Oru3VduGBnRiRJ4hXDVUqfAYwM4cKasEdW4c-CkKt2gWSUbYhDlaw8MJ/exec";
+        const redirectUrl = `${baseUrl}?room=${roomNumber}&status=${status}`; // Tạo URL
+        
+        // Chuyển hướng đến URL
+        // Chuyển hướng đến URL trong một tab mới
+        window.open(redirectUrl, '_blank');
+
+    });
+
+  // Xử lý sự kiện cho nút "Get fill form"
+  document.getElementById("getFilledFormBtn").addEventListener("click", function() {
+      // Lấy giá trị từ input
+        // Lấy giá trị từ input
+        let roomNumber = document.getElementById("roomNumber").value.trim();
+        let status = "filled" // Lấy giá trị trạng thái đã chọn
+
+        // Tạo URL dựa trên phòng và trạng thái
+        const baseUrl = "https://script.google.com/macros/s/AKfycbyh60RP9G05Oru3VduGBnRiRJ4hXDVUqfAYwM4cKasEdW4c-CkKt2gWSUbYhDlaw8MJ/exec";
+        const redirectUrl = `${baseUrl}?room=${roomNumber}&status=${status}`; // Tạo URL
+
+        // Chuyển hướng đến URL
+        // Chuyển hướng đến URL trong một tab mới
+        window.open(redirectUrl, '_blank');
+    });
+    </script>
+</body>
+</html>
+
+
